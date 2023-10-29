@@ -31,14 +31,9 @@ def upgrade() -> None:
         sa.Column("division", sa.String(),nullable=True),
         sa.Column("department", sa.String(),nullable=True)
     )
-
-    
-
-   
-
     
 
 def downgrade() -> None:
-    op.drop_table("users")
-    op.drop_table("addresses")
-    op.drop_table("phones")
+    op.drop_table("user")
+    op.drop_table("address")
+    op.drop_table("phone")

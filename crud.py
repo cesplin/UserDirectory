@@ -10,9 +10,9 @@ def get_user(db:Session, user_id:UUID):
 def get_all_users(db:Session):
     return db.query(schemas.User).all()
 
-def add_user(db:Session, user:schemas.User):
-    db_user = models.User(addresses=user.addresses, 
-                          phones=user.phones, 
+def add_user(db:Session, user:models.userCreate):
+
+    db_user = schemas.User(
                           display_name=user.display_name, 
                           surname=user.suffix, 
                           given=user.given, 
@@ -21,7 +21,7 @@ def add_user(db:Session, user:schemas.User):
                           division=user.division,
                           title=user.title, 
                           suffix=user.suffix,
-                          id=user.id)
+                          )
     db.add(db_user)
     db.commit()
     db.refresh(db_user)

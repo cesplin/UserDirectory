@@ -1,5 +1,5 @@
 from pydantic import BaseModel, constr
-from uuid import UUID
+from uuid import UUID, uuid4
 
 class UserBase(BaseModel):
     display_name: str
@@ -26,8 +26,8 @@ class userCreate(UserBase):
     department:str | None = None
 
 class User(userCreate):
-    id:UUID
-
+    display_name:str
+    
     class Config:
         from_attributes = True
 

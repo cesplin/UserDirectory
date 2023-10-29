@@ -20,17 +20,18 @@ depends_on: Union[str, Sequence[str], None] = None
 
 def upgrade() -> None:
     op.create_table(
-        "addresses",
+        "address",
         sa.Column("addr_id", sa.Uuid, primary_key=True),
         sa.Column("type", sa.String(), nullable=True),
         sa.Column("house_number", sa.String(), nullable=True),
         sa.Column("street", sa.String(), nullable=True),
         sa.Column("city", sa.String(), nullable=True),
         sa.Column("state", sa.String(), nullable=True),
+        sa.Column("user_id", sa.Uuid, unique=True, nullable=False)
     )
-
-    op.create_foreign_key("fk_user_address", "users", "addresses", ["user_id"], ["addr_id"] )
-
+    op.create_index("ik_addr_user","address",["user_id"])
 
 def downgrade() -> None:
+    op.drop_table("users")
     op.drop_table("addresses")
+    op.drop_table("phones")

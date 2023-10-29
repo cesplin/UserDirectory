@@ -29,6 +29,10 @@ app.add_middleware(
 async def home(db:Session = Depends(get_db)) -> list[models.User]:
     return crud.get_all_users(db=db)
 
+@app.post("/")
+async def add_user(user:models.userCreate, db:Session = Depends(get_db)):
+    return crud.add_user(db=db, user=user)
+
 
 
 if __name__ == "__main__":
