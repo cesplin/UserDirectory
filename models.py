@@ -6,6 +6,7 @@ class UserBase(BaseModel):
 class Phone(BaseModel):
     number: constr(pattern=r'^\+\d{1,3}\s\d{3}\s\d{3}\s\d{4}$', strip_whitespace=True)
     type: str | None = None
+    user_id:UUID | None = None
 
 class Address(BaseModel):
     street: str | None = None
@@ -13,6 +14,7 @@ class Address(BaseModel):
     state: str | None = None
     zip_code: str | None = None
     country: str | None = None
+    user_id:UUID | None = None
 
 class userCreate(UserBase):
     surname: str | None = None

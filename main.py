@@ -26,7 +26,7 @@ app.add_middleware(
     allow_headers=["*"])
 
 @app.get("/")
-async def home(db:Session = Depends(get_db)) -> list[models.User]:
+async def home(db:Session = Depends(get_db)):
     return crud.get_all_users(db=db)
 
 @app.post("/")
